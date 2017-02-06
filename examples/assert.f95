@@ -5,10 +5,10 @@ program assertExample
     type(suit) :: testSuit
     call init(testSuit)
     
-    call run(testSuit, example)
+    !call run(testSuit, example)
     call run(testSuit, example2)
-    call run(testSuit, example3)
-    call run(testSuit, example4)
+    !call run(testSuit, example3)
+    !call run(testSuit, example4)
     
     call summary(testSuit)
 

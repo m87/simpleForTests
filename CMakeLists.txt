@@ -22,3 +22,8 @@ add_custom_command(
     ${CMAKE_CURRENT_SOURCE_DIR}/lib
 )
 
+install(TARGETS sft
+        LIBRARY DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/lib    
+        INCLUDES DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
