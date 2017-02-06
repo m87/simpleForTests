@@ -41,6 +41,7 @@ module SFT_Suit
             
                 if (this%passed .ne. this%allTests) then
                     call printError('Failures :: ' // adjustl(trim(strFails)))
+                    stop 9
                 else
                     call printSuccess('All tests passed! :: ' // adjustl(trim(strAllTests)))
                 end if
