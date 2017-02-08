@@ -1,21 +1,21 @@
-module SFT_Suit
-      use SFT_Utils
-      public :: run, init, summary
+module sft_SuiteModule
+      use sft_UtilsModule
+      public :: sft_run, sft_init, sft_summary
 
-      type suit
+      type sft_Suite
             integer :: passed
             integer :: allTests
-      end type suit
+      end type sft_Suite
 
       contains
         
-            subroutine run(this, test)
+            subroutine sft_run(this, test)
                 interface
                     function test() result(res)
                         logical :: res
                     end function test
                 end interface
-                type(suit) :: this
+                type(sft_Suite) :: this
                 logical :: res
                 
                 if (test()) then
@@ -24,28 +24,28 @@ module SFT_Suit
                     
                 this%allTests = this%allTests + 1
 
-            end subroutine run
+            end subroutine sft_run
 
-            subroutine init(this)
-                type(suit) :: this
+            subroutine sft_init(this)
+                type(sft_Suite) :: this
                 
                 this%passed = 0
                 this%allTests = 0
-            end subroutine init
+            end subroutine sft_init
 
-            subroutine summary(this)
-                type(suit) :: this
+            subroutine sft_summary(this)
+                type(sft_Suite) :: this
                 character(len=100) strFails, strAllTests
                 write(strFails,*) this%allTests - this%passed
                 write(strAllTests,*) this%allTests 
             
                 if (this%passed .ne. this%allTests) then
-                    call printError('Failures :: ' // adjustl(trim(strFails)))
+                    call sft_printError('Failures :: ' // adjustl(trim(strFails)))
                     stop 9
                 else
-                    call printSuccess('All tests passed! :: ' // adjustl(trim(strAllTests)))
+                    call sft_printSuccess('All tests passed! :: ' // adjustl(trim(strAllTests)))
                 end if
             end subroutine
     
 
-end module SFT_Suit
+end module sft_SuiteModule

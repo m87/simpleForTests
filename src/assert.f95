@@ -1,15 +1,15 @@
-module SFT_Assert
-    use SFT_Utils
+module sft_AssertModule
+    use sft_UtilsModule
 
-    public :: assertEqual, assertTrue, assertFalse
+    public :: sft_assertEqual, sft_assertTrue, sft_assertFalse
 
-    interface assertEqual
-        module procedure assertEqual_real, assertEqual_int
-    end interface assertEqual
+    interface sft_assertEqual
+        module procedure sft_assertEqual_real, sft_assertEqual_int
+    end interface sft_assertEqual
 
     contains
 
-        function assertEqual_real(A, B) result(res)
+        function sft_assertEqual_real(A, B) result(res)
             implicit none
             real :: A
             real :: B
@@ -20,13 +20,13 @@ module SFT_Assert
             
             res = (A .eq. B)
             if (.not. res) then
-                call printError('Expected [' // trim(strA) // '] was [' // trim(strB) // ']')
+                call sft_printError('Expected [' // trim(strA) // '] was [' // trim(strB) // ']')
             end if
 
 
-        end function assertEqual_real
+        end function sft_assertEqual_real
 
-        function assertEqual_int(A, B) result(res)
+        function sft_assertEqual_int(A, B) result(res)
             implicit none
             integer :: A
             integer :: B
@@ -37,32 +37,31 @@ module SFT_Assert
 
             res = (A .eq. B)
             if (.not. res) then
-                call printError('Expected [' // trim(strA) // '] was [' // trim(strB) // ']')
+                call sft_printError('Expected [' // trim(strA) // '] was [' // trim(strB) // ']')
             end if
             
-        end function assertEqual_int
+        end function sft_assertEqual_int
 
-        function assertTrue(A) result(res)
+        function sft_assertTrue(A) result(res)
             implicit none
             logical :: res
             logical :: A
 
             res = A
             if (.not. res) then
-                call printError('Expected [.TRUE.] was [.FALSE.]')
+                call sft_printError('Expected [.TRUE.] was [.FALSE.]')
             end if
-        end function assertTrue
+        end function sft_assertTrue
 
-        function assertFalse(A) result(res)
+        function sft_assertFalse(A) result(res)
             implicit none
             logical :: res
             logical :: A
 
             res = .not. A
             if (A) then
-                call printError('Expected [.FALSE.] was [.TRUE.]')
+                call sft_printError('Expected [.FALSE.] was [.TRUE.]')
             end if
-        end function assertFalse
+        end function sft_assertFalse
 
-
-end module SFT_Assert
+end module sft_AssertModule
