@@ -6,9 +6,10 @@ program assertExample
     call sft_init(testSuite)
     
     !call sft_run(testSuite, example)
-    call sft_run(testSuite, example2)
+    !call sft_run(testSuite, example2)
     !call sft_run(testSuite, example3)
     !call sft_run(testSuite, example4)
+    call sft_run(testSuite, example4)
     
     call sft_summary(testSuite)
 
@@ -31,7 +32,7 @@ program assertExample
  
         function example4() result(res)
             logical :: res
-            res = sft_assertTrue(.FALSE.)
+            res = sft_assertArrayEqual((/1,2,3/),(/1,2,3/))
         end function example4
                
 

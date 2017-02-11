@@ -1,11 +1,16 @@
 module sft_AssertModule
     use sft_UtilsModule
 
-    public :: sft_assertEqual, sft_assertTrue, sft_assertFalse
+    public :: sft_assertEqual, sft_assertTrue, sft_assertFalse, sft_assertArrayEqual
 
     interface sft_assertEqual
         module procedure sft_assertEqual_real, sft_assertEqual_int
     end interface sft_assertEqual
+
+    interface sft_assertArrayEqual
+        module procedure sft_assertArrayEqual_real, sft_assertArrayEqual_int
+    end interface sft_assertArrayEqual
+
 
     contains
 
@@ -63,5 +68,39 @@ module sft_AssertModule
                 call sft_printError('Expected [.FALSE.] was [.TRUE.]')
             end if
         end function sft_assertFalse
+
+        function sft_assertArrayEqual_real(A,B) result(res)
+            implicit none
+            real, dimension(:) :: A
+            real, dimension(:) :: B
+            logical :: res
+            
+            if(size(A) .ne. size(B)) then
+                return
+            end if
+
+            if(ALL(A==B)) then
+                res = .TRUE.
+            else
+                res = .FALSE.
+            end if
+        end function sft_assertArrayEqual_real
+
+        function sft_assertArrayEqual_int(A,B) result(res)
+            implicit none
+            integer, dimension(:) :: A
+            integer, dimension(:) :: B
+            logical :: res
+
+            if(size(A) .ne. size(B)) then
+                return
+            end if
+
+            if(ALL(A==B)) then
+                res = .TRUE.
+            else
+                res = .FALSE.
+            end if
+        end function sft_assertArrayEqual_int
 
 end module sft_AssertModule

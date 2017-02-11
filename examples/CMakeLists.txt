@@ -4,8 +4,8 @@ project (examples)
 set(CMAKE_BUILD_TYPE Release)
 enable_language (Fortran)
 
-LINK_DIRECTORIES(${PRERELEASE}/lib)
-include_directories(${PRERELEASE}/include)      
+LINK_DIRECTORIES(${PRERELEASE})
+include_directories(${PRERELEASE})      
 
 add_executable(assert.example assert.f95)
 target_link_libraries(assert.example sft)
